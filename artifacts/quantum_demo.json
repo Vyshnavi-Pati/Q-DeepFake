@@ -1,0 +1,22 @@
+{
+  "num_items": 16,
+  "num_qubits": 4,
+  "marked_indices": [
+    2,
+    5,
+    9,
+    13
+  ],
+  "grover_iterations": 1,
+  "shots": 1024,
+  "counts": {
+    "0101": 269,
+    "0010": 257,
+    "1101": 234,
+    "1001": 264
+  },
+  "selected_bitstring": "0101",
+  "selected_index": 5,
+  "selected_is_marked": true,
+  "circuit_depth": 25
+}

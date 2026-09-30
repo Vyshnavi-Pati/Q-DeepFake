@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deepfake | Quantum Image Analysis</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="intro" id="intro">
+        <div class="intro-logo">
+            <img src="assets/logo.png" alt="Qiskit">
+        </div>
+        <div class="intro-line"></div>
+        <p>QUANTUM IMAGE ANALYSIS</p>
+    </div>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <div class="eyebrow">
+                    <span></span>
+                    QUANTUM IMAGE ANALYSIS
+                </div>
+
+                <h1>DEEP<span>FAKE</span></h1>
+
+                <p class="description">
+                    Analyze whether an image is
+                    <strong>real</strong>,
+                    <strong>AI-modified</strong>, or
+                    <strong>AI-generated.</strong>
+                </p>
+            </div>
+
+            <div class="upload-section" id="upload">
+                <div class="upload-card" id="uploadCard">
+                    <div class="upload-icon"><span>↑</span></div>
+                    <h2>Upload an image</h2>
+                    <p>
+                        Drag &amp; drop your image or
+                        <label for="fileInput">browse</label>
+                    </p>
+                    <div class="file-types">
+                        <span>PNG</span>
+                        <span>JPG</span>
+                        <span>JPEG</span>
+                    </div>
+                    <input
+                        type="file"
+                        id="fileInput"
+                        accept="image/png,image/jpeg,image/jpg"
+                        hidden>
+                </div>
+
+                <div class="preview-card hidden" id="previewCard">
+                    <div class="preview-image">
+                        <img id="previewImage" alt="Selected image">
+                    </div>
+
+                    <div class="preview-info">
+                        <div>
+                            <span>SELECTED IMAGE</span>
+                            <p id="fileName"></p>
+                        </div>
+                        <button id="removeBtn" class="remove-btn" type="button">×</button>
+                    </div>
+
+                    <button id="analyzeBtn" class="analyze-btn" type="button">
+                        Analyze Image <span>→</span>
+                    </button>
+                </div>
+
+                <div class="processing-card hidden" id="processingCard">
+                    <div class="processing-top">
+                        <div>
+                            <span>QUANTUM ANALYSIS</span>
+                            <h3 id="processingText">Processing image...</h3>
+                        </div>
+                        <strong id="progressPercent">0%</strong>
+                    </div>
+
+                    <div class="progress-track">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+
+                    <div class="stages">
+                        <span class="active">PREPROCESSING</span>
+                        <span>FEATURES</span>
+                        <span>QUANTUM</span>
+                        <span>CLASSIFICATION</span>
+                    </div>
+                </div>
+
+                <div class="result-card hidden" id="resultCard">
+                    <div class="result-top">
+                        <div>
+                            <span class="result-eyebrow">FORENSIC RESULT</span>
+                            <h2 id="classificationText">—</h2>
+                        </div>
+                        <button id="newAnalysisBtn" class="new-analysis-btn" type="button">
+                            Analyze another
+                        </button>
+                    </div>
+
+                    <div class="probability-list">
+                        <div class="probability-row">
+                            <div class="probability-label">
+                                <span>Completely Real</span>
+                                <strong id="realPercent">0%</strong>
+                            </div>
+                            <div class="probability-track">
+                                <div class="probability-fill" id="realBar"></div>
+                            </div>
+                        </div>
+
+                        <div class="probability-row">
+                            <div class="probability-label">
+                                <span>Modified Using AI</span>
+                                <strong id="modifiedPercent">0%</strong>
+                            </div>
+                            <div class="probability-track">
+                                <div class="probability-fill" id="modifiedBar"></div>
+                            </div>
+                        </div>
+
+                        <div class="probability-row">
+                            <div class="probability-label">
+                                <span>Completely AI Generated</span>
+                                <strong id="aiPercent">0%</strong>
+                            </div>
+                            <div class="probability-track">
+                                <div class="probability-fill" id="aiBar"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quantum-result" id="quantumResult">
+                        <div class="quantum-heading">
+                            <span>QUANTUM ANALYSIS</span>
+                            <strong>GROVER SEARCH</strong>
+                        </div>
+
+                        <div class="quantum-grid">
+                            <div><span>Search space</span><strong id="qSearchSpace">—</strong></div>
+                            <div><span>Qubits</span><strong id="qQubits">—</strong></div>
+                            <div><span>Iterations</span><strong id="qIterations">—</strong></div>
+                            <div><span>Selected patch</span><strong id="qPatch">—</strong></div>
+                        </div>
+
+                        <p id="quantumNote"></p>
+                    </div>
+
+                    <div class="error-message hidden" id="errorMessage"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="assets/logo.png" alt="Qiskit">
+                <div>
+                    <strong>DEEPFAKE</strong>
+                    <span>QUANTUM IMAGE ANALYSIS</span>
+                </div>
+            </div>
+
+            <div class="footer-team">
+                <span class="footer-label">PROJECT BY</span>
+                <div class="members">
+                    <span>Vyshnavi</span>
+                    <i></i>
+                    <span>Priyanka</span>
+                    <i></i>
+                    <span>Kalpana</span>
+                </div>
+            </div>
+
+            <div class="footer-year">
+                <span>QISKIT</span>
+                <i>•</i>
+                <span>2K26</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

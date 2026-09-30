@@ -1,0 +1,10 @@
+fastapi>=0.115,<1
+uvicorn[standard]>=0.34,<1
+python-multipart>=0.0.20,<1
+pillow>=11,<13
+numpy>=2,<3
+python-dotenv>=1,<2
+
+qiskit==2.5.2
+qiskit-aer==0.17.2
+qiskit-ibm-runtime==0.50.0
