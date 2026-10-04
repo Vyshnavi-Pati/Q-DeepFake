@@ -2,16 +2,21 @@
   "input_size": 224,
   "num_classes_main": 3,
   "num_classes_specialist": 2,
-  "ensemble_alpha": 0.4,
+  "ensemble_alpha": 1.0,
   "classes": [
     "Completely Real",
-    "Modified Using AI",
-    "Completely AI Generated"
+    "Completely AI Generated",
+    "Modified Using AI"
   ],
   "specialist_classes": [
     "Completely Real",
     "Completely AI Generated"
   ],
-  "test_accuracy": 0.8578,
-  "test_macro_f1": 0.8567
+  "validation_accuracy": 0.9356,
+  "validation_macro_f1": 0.9349,
+  "test_accuracy": 0.9178,
+  "test_macro_f1": 0.9161,
+  "hard_ai_images": 13,
+  "hard_ai_correct": 13,
+  "hard_ai_accuracy": 1.0
 }
