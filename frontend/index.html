@@ -2,193 +2,1184 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deepfake | Quantum Image Analysis</title>
-    <link rel="stylesheet" href="style.css">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        QDeepFake | Quantum Image Forensics
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
+
 
 <body>
 
-    <div class="intro" id="intro">
+
+    <!-- =====================================================
+         INTRO SCREEN
+    ====================================================== -->
+
+    <div
+        class="intro"
+        id="intro"
+    >
+
         <div class="intro-logo">
-            <img src="assets/logo.png" alt="Qiskit">
+
+            <img
+                src="assets/logo.png"
+                alt="Qiskit"
+            >
+
         </div>
+
         <div class="intro-line"></div>
-        <p>QUANTUM IMAGE ANALYSIS</p>
+
+        <p>
+            QUANTUM IMAGE FORENSICS
+        </p>
+
     </div>
 
-    <main>
-        <section class="hero" id="home">
-            <div class="hero-content">
-                <div class="eyebrow">
-                    <span></span>
-                    QUANTUM IMAGE ANALYSIS
-                </div>
 
-                <h1>DEEP<span>FAKE</span></h1>
+    <!-- =====================================================
+         TOP BRAND
+    ====================================================== -->
 
-                <p class="description">
-                    Analyze whether an image is
-                    <strong>real</strong>,
-                    <strong>AI-modified</strong>, or
-                    <strong>AI-generated.</strong>
-                </p>
+    <header class="top-header">
+
+        <div class="brand">
+
+            <img
+                src="assets/logo.png"
+                alt="Qiskit"
+            >
+
+            <div class="brand-text">
+
+                <strong>
+                    QDEEPFAKE
+                </strong>
+
+                <span>
+                    QUANTUM IMAGE FORENSICS
+                </span>
+
             </div>
 
-            <div class="upload-section" id="upload">
-                <div class="upload-card" id="uploadCard">
-                    <div class="upload-icon"><span>↑</span></div>
-                    <h2>Upload an image</h2>
-                    <p>
-                        Drag &amp; drop your image or
-                        <label for="fileInput">browse</label>
-                    </p>
-                    <div class="file-types">
-                        <span>PNG</span>
-                        <span>JPG</span>
-                        <span>JPEG</span>
-                    </div>
-                    <input
-                        type="file"
-                        id="fileInput"
-                        accept="image/png,image/jpeg,image/jpg"
-                        hidden>
+        </div>
+
+
+        <div class="header-badge">
+            CLASSICAL + QUANTUM
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main>
+
+
+        <!-- =================================================
+             HERO
+        ================================================== -->
+
+        <section class="hero">
+
+            <div class="eyebrow">
+
+                <span></span>
+
+                HYBRID IMAGE FORENSICS
+
+            </div>
+
+
+            <h1>
+                When AI Lies,
+                <span>Quantum Reveals The Truth</span>
+            </h1>
+
+
+            <p class="description">
+
+                QDeepFake combines deep-learning image
+                forensics with Grover's quantum search
+                to identify suspicious image regions.
+
+            </p>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             UPLOAD AREA
+        ================================================== -->
+
+        <section class="upload-section">
+
+
+            <!-- UPLOAD -->
+
+            <div
+                class="upload-card"
+                id="uploadCard"
+            >
+
+                <div class="upload-icon">
+
+                    <span>
+                        ↑
+                    </span>
+
                 </div>
 
-                <div class="preview-card hidden" id="previewCard">
-                    <div class="preview-image">
-                        <img id="previewImage" alt="Selected image">
+
+                <h2>
+                    Upload an image
+                </h2>
+
+
+                <p>
+
+                    Drag &amp; drop your image or
+
+                    <label for="fileInput">
+                        browse
+                    </label>
+
+                </p>
+
+
+                <div class="file-types">
+
+                    <span>
+                        PNG
+                    </span>
+
+                    <span>
+                        JPG
+                    </span>
+
+                    <span>
+                        JPEG
+                    </span>
+
+                </div>
+
+
+                <input
+                    type="file"
+                    id="fileInput"
+                    accept="image/png,image/jpeg,image/jpg"
+                    hidden
+                >
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PREVIEW
+            ================================================== -->
+
+            <div
+                class="preview-card hidden"
+                id="previewCard"
+            >
+
+                <div class="preview-image">
+
+                    <img
+                        id="previewImage"
+                        alt="Selected image"
+                    >
+
+                </div>
+
+
+                <div class="preview-info">
+
+                    <div>
+
+                        <span>
+                            SELECTED IMAGE
+                        </span>
+
+                        <p id="fileName">
+                            —
+                        </p>
+
                     </div>
 
-                    <div class="preview-info">
-                        <div>
-                            <span>SELECTED IMAGE</span>
-                            <p id="fileName"></p>
-                        </div>
-                        <button id="removeBtn" class="remove-btn" type="button">×</button>
-                    </div>
 
-                    <button id="analyzeBtn" class="analyze-btn" type="button">
-                        Analyze Image <span>→</span>
+                    <button
+                        class="remove-btn"
+                        id="removeBtn"
+                        type="button"
+                    >
+                        ×
                     </button>
+
                 </div>
 
-                <div class="processing-card hidden" id="processingCard">
-                    <div class="processing-top">
-                        <div>
-                            <span>QUANTUM ANALYSIS</span>
-                            <h3 id="processingText">Processing image...</h3>
-                        </div>
-                        <strong id="progressPercent">0%</strong>
+
+                <button
+                    class="analyze-btn"
+                    id="analyzeBtn"
+                    type="button"
+                >
+
+                    Analyze Image
+
+                    <span>
+                        →
+                    </span>
+
+                </button>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PROCESSING
+            ================================================== -->
+
+            <div
+                class="processing-card hidden"
+                id="processingCard"
+            >
+
+                <div class="processing-top">
+
+                    <div>
+
+                        <span>
+                            HYBRID ANALYSIS
+                        </span>
+
+                        <h3
+                            id="processingText"
+                        >
+                            Preparing image...
+                        </h3>
+
                     </div>
 
-                    <div class="progress-track">
-                        <div class="progress-bar" id="progressBar"></div>
-                    </div>
 
-                    <div class="stages">
-                        <span class="active">PREPROCESSING</span>
-                        <span>FEATURES</span>
-                        <span>QUANTUM</span>
-                        <span>CLASSIFICATION</span>
-                    </div>
+                    <strong
+                        id="progressPercent"
+                    >
+                        0%
+                    </strong>
+
                 </div>
 
-                <div class="result-card hidden" id="resultCard">
-                    <div class="result-top">
-                        <div>
-                            <span class="result-eyebrow">FORENSIC RESULT</span>
-                            <h2 id="classificationText">—</h2>
-                        </div>
-                        <button id="newAnalysisBtn" class="new-analysis-btn" type="button">
-                            Analyze another
-                        </button>
+
+                <div class="progress-track">
+
+                    <div
+                        class="progress-bar"
+                        id="progressBar"
+                    ></div>
+
+                </div>
+
+
+                <div class="stages">
+
+                    <span class="active">
+                        PREPROCESSING
+                    </span>
+
+                    <span>
+                        CLASSICAL AI
+                    </span>
+
+                    <span>
+                        PATCH ANALYSIS
+                    </span>
+
+                    <span>
+                        GROVER SEARCH
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 RESULT
+            ================================================== -->
+
+            <div
+                class="result-card hidden"
+                id="resultCard"
+            >
+
+
+                <!-- =============================================
+                     RESULT HEADER
+                ============================================== -->
+
+                <div class="result-top">
+
+                    <div>
+
+                        <span class="result-eyebrow">
+                            FORENSIC RESULT
+                        </span>
+
+                        <h2
+                            id="classificationText"
+                        >
+                            —
+                        </h2>
+
                     </div>
+
+
+                    <button
+                        id="newAnalysisBtn"
+                        class="new-analysis-btn"
+                        type="button"
+                    >
+                        Analyze another
+                    </button>
+
+                </div>
+
+
+
+                <!-- =============================================
+                     IMAGE CLASSIFICATION
+                ============================================== -->
+
+                <section class="classification-section">
+
+                    <div class="section-title">
+
+                        <span>
+                            CLASSICAL AI
+                        </span>
+
+                        <h3>
+                            Image Classification
+                        </h3>
+
+                    </div>
+
 
                     <div class="probability-list">
-                        <div class="probability-row">
-                            <div class="probability-label">
-                                <span>Completely Real</span>
-                                <strong id="realPercent">0%</strong>
-                            </div>
-                            <div class="probability-track">
-                                <div class="probability-fill" id="realBar"></div>
-                            </div>
-                        </div>
+
+
+                        <!-- REAL -->
 
                         <div class="probability-row">
+
                             <div class="probability-label">
-                                <span>Modified Using AI</span>
-                                <strong id="modifiedPercent">0%</strong>
+
+                                <span>
+                                    Completely Real
+                                </span>
+
+                                <strong
+                                    id="realPercent"
+                                >
+                                    0%
+                                </strong>
+
                             </div>
+
+
                             <div class="probability-track">
-                                <div class="probability-fill" id="modifiedBar"></div>
+
+                                <div
+                                    class="probability-fill real-fill"
+                                    id="realBar"
+                                ></div>
+
                             </div>
+
                         </div>
 
+
+
+                        <!-- AI -->
+
                         <div class="probability-row">
+
                             <div class="probability-label">
-                                <span>Completely AI Generated</span>
-                                <strong id="aiPercent">0%</strong>
+
+                                <span>
+                                    Completely AI Generated
+                                </span>
+
+                                <strong
+                                    id="aiPercent"
+                                >
+                                    0%
+                                </strong>
+
                             </div>
+
+
                             <div class="probability-track">
-                                <div class="probability-fill" id="aiBar"></div>
+
+                                <div
+                                    class="probability-fill ai-fill"
+                                    id="aiBar"
+                                ></div>
+
                             </div>
+
                         </div>
+
+
+
+                        <!-- MODIFIED -->
+
+                        <div class="probability-row">
+
+                            <div class="probability-label">
+
+                                <span>
+                                    Modified Using AI
+                                </span>
+
+                                <strong
+                                    id="modifiedPercent"
+                                >
+                                    0%
+                                </strong>
+
+                            </div>
+
+
+                            <div class="probability-track">
+
+                                <div
+                                    class="probability-fill modified-fill"
+                                    id="modifiedBar"
+                                ></div>
+
+                            </div>
+
+                        </div>
+
                     </div>
 
-                    <div class="quantum-result" id="quantumResult">
-                        <div class="quantum-heading">
-                            <span>QUANTUM ANALYSIS</span>
-                            <strong>GROVER SEARCH</strong>
+                </section>
+
+
+
+                <!-- =============================================
+                     FORENSIC MAP
+                ============================================== -->
+
+                <section class="forensic-section">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <span>
+                                CLASSICAL PATCH ANALYSIS
+                            </span>
+
+                            <h3>
+                                Suspicious Region Map
+                            </h3>
+
                         </div>
 
-                        <div class="quantum-grid">
-                            <div><span>Search space</span><strong id="qSearchSpace">—</strong></div>
-                            <div><span>Qubits</span><strong id="qQubits">—</strong></div>
-                            <div><span>Iterations</span><strong id="qIterations">—</strong></div>
-                            <div><span>Selected patch</span><strong id="qPatch">—</strong></div>
+
+                        <div class="legend">
+
+                            <span>
+
+                                <i class="legend-marked"></i>
+
+                                Marked
+
+                            </span>
+
+
+                            <span>
+
+                                <i class="legend-found"></i>
+
+                                Grover Found
+
+                            </span>
+
                         </div>
 
-                        <p id="quantumNote"></p>
                     </div>
 
-                    <div class="error-message hidden" id="errorMessage"></div>
-                </div>
+
+                    <p class="section-description">
+
+                        The image is divided into 16 patches.
+                        Each patch is scored using the classical
+                        forensic model. Patches crossing the
+                        suspiciousness threshold become quantum
+                        search targets.
+
+                    </p>
+
+
+                    <div
+                        class="forensic-image"
+                        id="forensicImageContainer"
+                    >
+
+                        <img
+                            id="forensicImage"
+                            alt="Forensic analysis"
+                        >
+
+
+                        <div
+                            class="patch-overlay"
+                            id="patchOverlay"
+                        ></div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =============================================
+                     PATCH GRID
+                ============================================== -->
+
+                <section class="patch-section">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <span>
+                                PATCH FORENSICS
+                            </span>
+
+                            <h3>
+                                16-Patch Search Space
+                            </h3>
+
+                        </div>
+
+
+                        <div class="threshold-badge">
+
+                            Threshold:
+
+                            <strong id="thresholdValue">
+                                40%
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="patch-summary">
+
+                        <div class="summary-box">
+
+                            <span>
+                                TOTAL PATCHES
+                            </span>
+
+                            <strong id="totalPatches">
+                                16
+                            </strong>
+
+                        </div>
+
+
+                        <div class="summary-box marked-summary">
+
+                            <span>
+                                MARKED PATCHES
+                            </span>
+
+                            <strong id="markedPatches">
+                                0
+                            </strong>
+
+                        </div>
+
+
+                        <div class="summary-box">
+
+                            <span>
+                                PATCH COVERAGE
+                            </span>
+
+                            <strong id="patchCoverage">
+                                0%
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="patch-grid"
+                        id="patchGrid"
+                    ></div>
+
+
+                    <div class="top-candidates">
+
+                        <div class="mini-title">
+                            HIGHEST SUSPICIOUSNESS
+                        </div>
+
+
+                        <div
+                            class="candidate-list"
+                            id="candidateList"
+                        ></div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =============================================
+                     QUANTUM SEARCH
+                ============================================== -->
+
+                <section class="quantum-section">
+
+
+                    <div class="card-header quantum-header">
+
+                        <div>
+
+                            <span>
+                                QUANTUM FORENSICS
+                            </span>
+
+                            <h3>
+                                Grover Search
+                            </h3>
+
+                        </div>
+
+
+                        <div class="qiskit-badge">
+                            QISKIT
+                        </div>
+
+                    </div>
+
+
+                    <p class="section-description">
+
+                        Grover searches the complete patch
+                        search space for states marked by the
+                        classical forensic threshold.
+
+                    </p>
+
+
+                    <!-- QUANTUM FLOW -->
+
+                    <div class="quantum-flow">
+
+
+                        <div class="quantum-step">
+
+                            <strong
+                                id="quantumSearchSpace"
+                            >
+                                16
+                            </strong>
+
+                            <span>
+                                PATCH STATES
+                            </span>
+
+                        </div>
+
+
+                        <div class="flow-arrow">
+                            →
+                        </div>
+
+
+                        <div class="quantum-step">
+
+                            <strong
+                                id="quantumQubits"
+                            >
+                                4
+                            </strong>
+
+                            <span>
+                                QUBITS
+                            </span>
+
+                        </div>
+
+
+                        <div class="flow-arrow">
+                            →
+                        </div>
+
+
+                        <div class="quantum-step marked-quantum">
+
+                            <strong
+                                id="quantumMarked"
+                            >
+                                0
+                            </strong>
+
+                            <span>
+                                MARKED
+                            </span>
+
+                        </div>
+
+
+                        <div class="flow-arrow">
+                            →
+                        </div>
+
+
+                        <div class="quantum-step found-quantum">
+
+                            <strong
+                                id="quantumFound"
+                            >
+                                0
+                            </strong>
+
+                            <span>
+                                FOUND
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- QUANTUM METRICS -->
+
+                    <div class="quantum-metrics">
+
+
+                        <div class="metric">
+
+                            <span>
+                                SEARCH SPACE
+                            </span>
+
+                            <strong
+                                id="qSearchSpace"
+                            >
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="metric">
+
+                            <span>
+                                QUBITS
+                            </span>
+
+                            <strong
+                                id="qQubits"
+                            >
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="metric">
+
+                            <span>
+                                THRESHOLD
+                            </span>
+
+                            <strong
+                                id="qThreshold"
+                            >
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="metric">
+
+                            <span>
+                                PATCHES FOUND
+                            </span>
+
+                            <strong
+                                id="qFoundCount"
+                            >
+                                —
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- SEARCH RESULT -->
+
+                    <div
+                        class="quantum-result-box"
+                        id="quantumResultBox"
+                    >
+
+                        <div>
+
+                            <span>
+                                GROVER SEARCH RESULT
+                            </span>
+
+                            <strong
+                                id="quantumStatus"
+                            >
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div
+                            class="quantum-check"
+                            id="quantumCheck"
+                        >
+                            ✓
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- FOUND PATCHES -->
+
+                    <div class="found-patches-section">
+
+                        <div class="mini-title">
+                            PATCHES FOUND BY GROVER
+                        </div>
+
+
+                        <div
+                            class="found-patches-list"
+                            id="foundPatchesList"
+                        ></div>
+
+                    </div>
+
+
+
+                    <!-- SEARCH ROUNDS -->
+
+                    <div class="rounds-section">
+
+                        <div class="mini-title">
+                            GROVER SEARCH ROUNDS
+                        </div>
+
+
+                        <div
+                            class="rounds-list"
+                            id="roundsList"
+                        ></div>
+
+                    </div>
+
+
+
+                    <!-- MEASUREMENT -->
+
+                    <div class="measurement-section">
+
+                        <div class="mini-title">
+                            FIRST-ROUND MEASUREMENT COUNTS
+                        </div>
+
+
+                        <div
+                            class="measurement-chart"
+                            id="measurementChart"
+                        ></div>
+
+                    </div>
+
+
+
+                    <!-- NOTE -->
+
+                    <div
+                        class="quantum-note"
+                        id="quantumNote"
+                    >
+                        —
+                    </div>
+
+                </section>
+
+
+
+                <!-- =============================================
+                     HOW IT WORKS
+                ============================================== -->
+
+                <section class="pipeline-section">
+
+                    <div class="section-title">
+
+                        <span>
+                            QDEEPFAKE PIPELINE
+                        </span>
+
+                        <h3>
+                            Classical → Quantum
+                        </h3>
+
+                    </div>
+
+
+                    <div class="pipeline">
+
+
+                        <div class="pipeline-step">
+
+                            <span>
+                                01
+                            </span>
+
+                            <strong>
+                                CLASSICAL AI
+                            </strong>
+
+                            <small>
+                                Classifies the image
+                            </small>
+
+                        </div>
+
+
+                        <div class="pipeline-arrow">
+                            →
+                        </div>
+
+
+                        <div class="pipeline-step">
+
+                            <span>
+                                02
+                            </span>
+
+                            <strong>
+                                PATCH SCORING
+                            </strong>
+
+                            <small>
+                                Scores all 16 patches
+                            </small>
+
+                        </div>
+
+
+                        <div class="pipeline-arrow">
+                            →
+                        </div>
+
+
+                        <div class="pipeline-step quantum-pipeline">
+
+                            <span>
+                                03
+                            </span>
+
+                            <strong>
+                                GROVER
+                            </strong>
+
+                            <small>
+                                Searches marked states
+                            </small>
+
+                        </div>
+
+
+                        <div class="pipeline-arrow">
+                            →
+                        </div>
+
+
+                        <div class="pipeline-step">
+
+                            <span>
+                                04
+                            </span>
+
+                            <strong>
+                                FORENSIC MAP
+                            </strong>
+
+                            <small>
+                                Shows suspicious regions
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =============================================
+                     ERROR
+                ============================================== -->
+
+                <div
+                    class="error-message hidden"
+                    id="errorMessage"
+                ></div>
+
+
             </div>
+
         </section>
+
     </main>
 
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
     <footer>
+
         <div class="footer-inner">
+
+
             <div class="footer-brand">
-                <img src="assets/logo.png" alt="Qiskit">
+
+                <img
+                    src="assets/logo.png"
+                    alt="Qiskit"
+                >
+
                 <div>
-                    <strong>DEEPFAKE</strong>
-                    <span>QUANTUM IMAGE ANALYSIS</span>
+
+                    <strong>
+                        QDEEPFAKE
+                    </strong>
+
+                    <span>
+                        QUANTUM IMAGE FORENSICS
+                    </span>
+
                 </div>
+
             </div>
+
 
             <div class="footer-team">
-                <span class="footer-label">PROJECT BY</span>
+
+                <span>
+                    PROJECT BY
+                </span>
+
                 <div class="members">
-                    <span>Vyshnavi</span>
+
+                    <span>
+                        Vyshnavi
+                    </span>
+
                     <i></i>
-                    <span>Priyanka</span>
+
+                    <span>
+                        Priyanka
+                    </span>
+
                     <i></i>
-                    <span>Kalpana</span>
+
+                    <span>
+                        Kalpana
+                    </span>
+
+                    <i></i>
+
+                    <span>
+                        Mr.K K Singh
+                    </span>
+
                 </div>
+
             </div>
+
 
             <div class="footer-year">
-                <span>QISKIT</span>
-                <i>•</i>
-                <span>2K26</span>
+
+                <span>
+                    QISKIT
+                </span>
+
+                <i>
+                    •
+                </i>
+
+                <span>
+                    2K26
+                </span>
+
             </div>
+
+
         </div>
+
     </footer>
 
+
+
     <script src="script.js"></script>
+
 </body>
+
 </html>

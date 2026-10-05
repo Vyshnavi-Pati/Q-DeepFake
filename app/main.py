@@ -15,8 +15,7 @@ from app.config import (
 )
 from app.services.patches import analyze_patches
 from app.services.predictor import ForensicsPredictor
-from app.services.quantum import simulate_grover_search
-
+from app.services.quantum import simulate_grover_search_all
 
 app = FastAPI(
     title="Deep Fake | Quantum Image Forensics API",
@@ -31,6 +30,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 predictor = ForensicsPredictor(
     main_model_path=MAIN_MODEL_PATH,
     specialist_model_path=SPECIALIST_MODEL_PATH,
@@ -41,7 +41,9 @@ predictor = ForensicsPredictor(
 @app.get("/")
 def root():
     return {
-        "message": "Deep Fake | Quantum Image Forensics API",
+        "message": (
+            "Deep Fake | Quantum Image Forensics API"
+        ),
         "status": "running",
     }
 
@@ -50,90 +52,354 @@ def root():
 def health():
     return {
         "status": "healthy",
-        "device": str(predictor.device),
-        "quantum_enabled": QUANTUM_ENABLED,
+        "device": str(
+            predictor.device
+        ),
+        "quantum_enabled": (
+            QUANTUM_ENABLED
+        ),
     }
 
 
 @app.post("/predict")
-async def predict_image(file: UploadFile = File(...)):
-    if not file.content_type or not file.content_type.startswith("image/"):
+async def predict_image(
+    file: UploadFile = File(...)
+):
+
+    # --------------------------------------------------------
+    # FILE VALIDATION
+    # --------------------------------------------------------
+
+    if (
+        not file.content_type
+        or not file.content_type.startswith("image/")
+    ):
         raise HTTPException(
             status_code=400,
-            detail="Please upload a PNG, JPG, or JPEG image.",
+            detail=(
+                "Please upload a PNG, JPG, "
+                "or JPEG image."
+            ),
         )
 
     contents = await file.read()
+
     if not contents:
+
         raise HTTPException(
             status_code=400,
             detail="Uploaded file is empty.",
         )
 
     try:
-        image = Image.open(BytesIO(contents)).convert("RGB")
+
+        image = Image.open(
+            BytesIO(contents)
+        ).convert("RGB")
+
     except UnidentifiedImageError as exc:
+
         raise HTTPException(
             status_code=400,
-            detail="The uploaded file is not a valid image.",
+            detail=(
+                "The uploaded file is not "
+                "a valid image."
+            ),
         ) from exc
 
-    classical_result = predictor.predict(image)
+
+    # ========================================================
+    # CLASSICAL AI ANALYSIS
+    # ========================================================
+
+    classical_result = predictor.predict(
+        image
+    )
 
     response = {
         "filename": file.filename,
-        "classification": classical_result["classification"],
-        "probabilities": classical_result["probabilities"],
-        "percentages": classical_result["percentages"],
+
+        "classification": (
+            classical_result[
+                "classification"
+            ]
+        ),
+
+        "probabilities": (
+            classical_result[
+                "probabilities"
+            ]
+        ),
+
+        "percentages": (
+            classical_result[
+                "percentages"
+            ]
+        ),
+
         "model": {
-            "main_prediction": classical_result["main_prediction"],
-            "ensemble_alpha": classical_result["ensemble_alpha"],
-            "device": classical_result["device"],
+            "main_prediction": (
+                classical_result[
+                    "main_prediction"
+                ]
+            ),
+
+            "ensemble_alpha": (
+                classical_result[
+                    "ensemble_alpha"
+                ]
+            ),
+
+            "device": (
+                classical_result[
+                    "device"
+                ]
+            ),
         },
     }
 
+
+    # ========================================================
+    # QUANTUM ANALYSIS
+    # ========================================================
+
     if QUANTUM_ENABLED:
+
+    # ========================================================
+    # CLASSICAL PATCH ANALYSIS
+    # ========================================================
+
         patch_analysis = analyze_patches(
             image=image,
             predictor=predictor,
             grid_size=GRID_SIZE,
-            num_marked=QUANTUM_MARKED,
+            suspicion_threshold=0.40,
         )
 
-        quantum_result = simulate_grover_search(
-            marked_indices=patch_analysis["marked_indices"],
-            num_items=GRID_SIZE * GRID_SIZE,
-            shots=QUANTUM_SHOTS,
+        marked_indices = (
+            patch_analysis[
+                "marked_indices"
+            ]
         )
 
-        selected_index = quantum_result["selected_index"]
+        # ========================================================
+        # GROVER SEARCH
+        # ========================================================
+
+        quantum_result = (
+            simulate_grover_search_all(
+                marked_indices=marked_indices,
+                num_items=GRID_SIZE * GRID_SIZE,
+                shots=QUANTUM_SHOTS,
+            )
+            if marked_indices
+            else {
+                "num_items": GRID_SIZE * GRID_SIZE,
+                "num_qubits": int(
+                    (GRID_SIZE * GRID_SIZE)
+                    .bit_length()
+                    - 1
+                ),
+                "marked_indices": [],
+                "found_indices": [],
+                "grover_rounds": [],
+                "total_found": 0,
+                "selected_index": None,
+                "selected_bitstring": None,
+                "selected_is_marked": False,
+                "counts": {},
+                "circuit_depth": 0,
+                "circuit": None,
+            }
+        )
+
+        selected_indices = (
+            quantum_result[
+                "found_indices"
+            ]
+        )
+
+        selected_patches = [
+            patch
+            for patch in patch_analysis[
+                "patches"
+            ]
+            if patch["index"]
+            in selected_indices
+        ]
+
         selected_patch = next(
             (
-                item
-                for item in patch_analysis["patches"]
-                if item["index"] == selected_index
+                patch
+                for patch in patch_analysis[
+                    "patches"
+                ]
+                if patch["index"]
+                == quantum_result[
+                    "selected_index"
+                ]
             ),
             None,
         )
 
-        response["quantum_analysis"] = {
+        first_round = (
+            quantum_result[
+                "grover_rounds"
+            ][0]
+            if quantum_result[
+                "grover_rounds"
+            ]
+            else None
+        )
+
+        response[
+            "quantum_analysis"
+        ] = {
+
+            "enabled": True,
+
             "algorithm": "Grover Search",
-            "search_space_size": quantum_result["num_items"],
-            "qubits": quantum_result["num_qubits"],
-            "marked_indices": quantum_result["marked_indices"],
-            "grover_iterations": quantum_result["grover_iterations"],
-            "selected_patch_index": selected_index,
-            "selected_patch_is_marked": quantum_result["selected_is_marked"],
-            "selected_patch": selected_patch,
-            "measurement_counts": quantum_result["counts"],
-            "circuit_depth": quantum_result["circuit_depth"],
-            "top_candidates": patch_analysis["top_candidates"],
+
+            "search_mode": (
+                "Multi-target suspicious-patch search"
+            ),
+
+            "grid_size": GRID_SIZE,
+
+            "search_space_size": (
+                quantum_result[
+                    "num_items"
+                ]
+            ),
+
+            "qubits": (
+                quantum_result[
+                    "num_qubits"
+                ]
+            ),
+
+            "suspicion_threshold": (
+                patch_analysis[
+                    "suspicion_threshold"
+                ]
+            ),
+
+            "marked_indices": (
+                patch_analysis[
+                    "marked_indices"
+                ]
+            ),
+
+            "marked_count": (
+                patch_analysis[
+                    "marked_count"
+                ]
+            ),
+
+            "patch_coverage": (
+                patch_analysis[
+                    "patch_coverage"
+                ]
+            ),
+
+            "found_indices": (
+                selected_indices
+            ),
+
+            "found_count": (
+                quantum_result[
+                    "total_found"
+                ]
+            ),
+
+            "selected_patch_indices": (
+                selected_indices
+            ),
+
+            "selected_patch_index": (
+                quantum_result[
+                    "selected_index"
+                ]
+            ),
+
+            "selected_bitstring": (
+                quantum_result[
+                    "selected_bitstring"
+                ]
+            ),
+
+            "selected_patch_is_marked": (
+                quantum_result[
+                    "selected_is_marked"
+                ]
+            ),
+
+            "selected_patch": (
+                selected_patch
+            ),
+
+            "selected_patches": (
+                selected_patches
+            ),
+
+            "grover_iterations": (
+                first_round[
+                    "grover_iterations"
+                ]
+                if first_round
+                else 0
+            ),
+
+            "search_rounds": (
+                quantum_result[
+                    "grover_rounds"
+                ]
+            ),
+
+            "measurement_counts": (
+                quantum_result[
+                    "counts"
+                ]
+            ),
+
+            "circuit_depth": (
+                quantum_result[
+                    "circuit_depth"
+                ]
+            ),
+
+            "top_candidates": (
+                patch_analysis[
+                    "top_candidates"
+                ]
+            ),
+
+            "patches": (
+                patch_analysis[
+                    "patches"
+                ]
+            ),
+
             "note": (
-                "Grover searches the classically scored candidate patch space. "
-                "It does not change the ML classification probabilities."
+                "Every image patch is scored classically. "
+                "A patch becomes a quantum target when its "
+                "non-real probability reaches the forensic "
+                "threshold. Grover then searches the complete "
+                "16-patch space for the marked states. When "
+                "multiple patches are marked, the search is "
+                "repeated to recover the remaining marked "
+                "patches. Grover does not change the image "
+                "classification probabilities."
             ),
         }
+
     else:
-        response["quantum_analysis"] = {"enabled": False}
+
+        response[
+            "quantum_analysis"
+        ] = {
+            "enabled": False
+        }
+
 
     return response
